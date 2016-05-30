@@ -1,0 +1,71 @@
+// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.dashboard {
+	position: relative;
+	min-height: 300px;
+	background-color: hotpink;
+	.sidebar {
+		float: left;
+		position: relative;
+		width: 200px;
+		height: 100%;
+		background-color: #ccc;
+		.header {
+			height: 50px;
+			background-color: teal;
+			text-align: center;
+			text-transform: uppercase;
+		}
+		.profile {
+			height: 50px;
+			background-color: violet;
+			text-align: center;
+			a {
+
+			}
+			a:hover {
+				color: green;
+				text-decoration: none;
+			}
+		}
+		.create {
+			height: 50px;
+			font-size: 14px;
+			background-color: orange;
+			text-align: center;
+			text-transform: uppercase;	
+			span {
+				margin-right: 10px;
+			}
+			a {
+				font-size: 30px;
+				font-weight: 900;
+			}
+			a:hover {
+				text-decoration: none;
+				color: purple;
+			}
+		}
+		.list {
+			text-align: center;
+			.apiary {
+				height: 30px;
+				cursor: pointer;
+			}
+			.apiary:hover {
+				background-color: lime;
+			}
+		}
+	}
+	.content {
+		float: left;
+		background-color: #4b0;
+		height: 100%;
+		width: calc(100% - 200px);
+	}
+	.control-panel {
+		background-color: #4bb;
+		width: 200px;
+		float: right;
+	}
+}
