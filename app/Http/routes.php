@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::auth();
 
-Route::get('/home', [
+Route::get('/', [
 	'as'   => 'home',
 	'uses' => 'HomeController@index'
 ]);
@@ -42,7 +38,22 @@ Route::post('/apiarios/editar/{id}', [
 	'uses' => 'HomeController@postEditApiary'
 ]);
 
-Route::post('/delete', [
+Route::post('/apiarios/apagar', [
 	'as'   => 'delete.apiary',
 	'uses' => 'HomeController@deleteApiary'
+]);
+
+Route::post('/apiarios/sessao', [
+	'as'   => 'save-session.apiary',
+	'uses' => 'HomeController@saveInSession'
+]);
+
+Route::get('/apiarios/colmeia/adicionar/{apiaryId}', [
+	'as'   => 'create.beehive',
+	'uses' => 'HomeController@createBeehive'
+]);
+
+Route::post('/apiarios/colmeia/adicionar/{apiaryId}', [
+	'as'   => 'post-create.beehive',
+	'uses' => 'HomeController@postCreateBeehive'
 ]);

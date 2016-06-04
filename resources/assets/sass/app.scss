@@ -1,59 +1,146 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+//variables
+$activeColor: #fece06;
+$backgroundColor: #222;
+$firstGreyShade: #aaa;
+$secondGreyShade: #ddd;
+
+//general styles
+.add-item {
+	color: #fff;
+	font-weight: bolder;
+}
+
 .dashboard {
 	position: relative;
-	min-height: 300px;
-	background-color: hotpink;
+	background-color: #4b0;
 	.sidebar {
+		min-height: 100vh;
 		float: left;
 		position: relative;
-		width: 200px;
-		height: 100%;
-		background-color: #ccc;
+		width: 220px;
+		background-color: #222;
 		.header {
-			height: 50px;
-			background-color: teal;
+			background-color: #222;
 			text-align: center;
-			text-transform: uppercase;
-		}
-		.profile {
-			height: 50px;
-			background-color: violet;
-			text-align: center;
-			a {
-
+			padding-top: 20px;
+			.logo {
+				height: 75px;
+				width: 75px;
+				margin: 0 auto;
+				background-size: contain;
+				background-position: 50% 50% 
 			}
-			a:hover {
-				color: green;
-				text-decoration: none;
+			.site-name {
+				text-transform: uppercase;
+				color: #ccc;
+				font-weight: bolder;
+				margin: 20px 0 0 0;
+				display: block;
+			}
+			.profile {
+				height: 50px;
+				text-align: center;
+				.dropdown {
+					.profile-name {
+						color: #777;
+					}
+					.profile-name:hover {
+						color: $activeColor;
+						text-decoration: none;
+					}
+				}
 			}
 		}
 		.create {
+			position: relative;
+			display: table;
 			height: 50px;
-			font-size: 14px;
-			background-color: orange;
+			font-size: 13px;
+			font-weight: bold;
 			text-align: center;
 			text-transform: uppercase;	
+			color: $secondGreyShade;
+			margin-left: 20px;
 			span {
-				margin-right: 10px;
+				display: table-cell;
+				padding-left: 25px;
+				vertical-align: middle;
 			}
 			a {
+				position: absolute;
+				top: 2px;
+				display: table-cell;
 				font-size: 30px;
 				font-weight: 900;
+				vertical-align: middle;
 			}
 			a:hover {
 				text-decoration: none;
-				color: purple;
+				color: $activeColor;
 			}
 		}
 		.list {
-			text-align: center;
 			.apiary {
+				padding-left: 30px;
+				color: #aaa;
 				height: 30px;
 				cursor: pointer;
 			}
+			.apiary:before {
+				content: '';
+				background-color: $activeColor;
+				width: 5px;
+				height: 5px;
+				display: inline-block;
+				margin-right: 10px;
+			}
 			.apiary:hover {
-				background-color: lime;
+				color: $backgroundColor;
+				background-color: $activeColor;
+			}
+			.active {
+				color: $backgroundColor;
+				background-color: $activeColor;	
+			}
+		}
+		.apiary-info {
+			width: 220px;
+			height: 220px;
+			background-color: $backgroundColor;
+			bottom: 0;
+			position: fixed;
+			.title {
+				position: relative;
+				font-size: 13px;
+				font-weight: bold;
+				text-transform: uppercase;	
+				color: $secondGreyShade;
+				margin-left: 20px;
+			}
+			.field {
+				font-size: 13px;
+				padding-left: 25px;
+				color: $firstGreyShade;
+				margin-top: 5px;
+				span {
+					margin-left: 5px;
+				}
+			}
+			.options {
+				margin-top: 10px;
+				padding-left: 25px;
+				.option {
+					font-size: 12px;
+					cursor: pointer;
+					color: $firstGreyShade;
+					margin-right: 5px;
+				}
+				.option:hover {
+					color: $activeColor;
+					text-decoration: none;
+				}
 			}
 		}
 	}
@@ -61,7 +148,31 @@
 		float: left;
 		background-color: #4b0;
 		height: 100%;
-		width: calc(100% - 200px);
+		width: calc(100% - 220px);
+		.tabs {
+			background-color: cyan;
+			width: 100%;
+			.tab{
+				text-align: center;
+				display: inline-block;
+				width: 33%;
+				cursor: pointer;
+			}
+			.tab:hover {
+				background-color: tomato;
+			}
+			.active {
+				background-color: silver;	
+			}
+		}
+		.info-panel {
+			width: 100%;
+			height: 300px;
+			background-color: hotpink;
+			bottom: 0;
+			position: fixed;
+			opacity: 0.3;
+		}
 	}
 	.control-panel {
 		background-color: #4bb;

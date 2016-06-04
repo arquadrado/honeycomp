@@ -1,51 +1,137 @@
+.add-item {
+  color: #fff;
+  font-weight: bolder; }
+
 .dashboard {
   position: relative;
-  min-height: 300px;
-  background-color: hotpink; }
+  background-color: #4b0; }
   .dashboard .sidebar {
+    min-height: 100vh;
     float: left;
     position: relative;
-    width: 200px;
-    height: 100%;
-    background-color: #ccc; }
+    width: 220px;
+    background-color: #222; }
     .dashboard .sidebar .header {
-      height: 50px;
-      background-color: teal;
+      background-color: #222;
       text-align: center;
-      text-transform: uppercase; }
-    .dashboard .sidebar .profile {
-      height: 50px;
-      background-color: violet;
-      text-align: center; }
-      .dashboard .sidebar .profile a:hover {
-        color: green;
-        text-decoration: none; }
+      padding-top: 20px; }
+      .dashboard .sidebar .header .logo {
+        height: 75px;
+        width: 75px;
+        margin: 0 auto;
+        background-size: contain;
+        background-position: 50% 50%; }
+      .dashboard .sidebar .header .site-name {
+        text-transform: uppercase;
+        color: #ccc;
+        font-weight: bolder;
+        margin: 20px 0 0 0;
+        display: block; }
+      .dashboard .sidebar .header .profile {
+        height: 50px;
+        text-align: center; }
+        .dashboard .sidebar .header .profile .dropdown .profile-name {
+          color: #777; }
+        .dashboard .sidebar .header .profile .dropdown .profile-name:hover {
+          color: #fece06;
+          text-decoration: none; }
     .dashboard .sidebar .create {
+      position: relative;
+      display: table;
       height: 50px;
-      font-size: 14px;
-      background-color: orange;
+      font-size: 13px;
+      font-weight: bold;
       text-align: center;
-      text-transform: uppercase; }
+      text-transform: uppercase;
+      color: #ddd;
+      margin-left: 20px; }
       .dashboard .sidebar .create span {
-        margin-right: 10px; }
+        display: table-cell;
+        padding-left: 25px;
+        vertical-align: middle; }
       .dashboard .sidebar .create a {
+        position: absolute;
+        top: 2px;
+        display: table-cell;
         font-size: 30px;
-        font-weight: 900; }
+        font-weight: 900;
+        vertical-align: middle; }
       .dashboard .sidebar .create a:hover {
         text-decoration: none;
-        color: purple; }
-    .dashboard .sidebar .list {
-      text-align: center; }
-      .dashboard .sidebar .list .apiary {
-        height: 30px;
-        cursor: pointer; }
-      .dashboard .sidebar .list .apiary:hover {
-        background-color: lime; }
+        color: #fece06; }
+    .dashboard .sidebar .list .apiary {
+      padding-left: 30px;
+      color: #aaa;
+      height: 30px;
+      cursor: pointer; }
+    .dashboard .sidebar .list .apiary:before {
+      content: '';
+      background-color: #fece06;
+      width: 5px;
+      height: 5px;
+      display: inline-block;
+      margin-right: 10px; }
+    .dashboard .sidebar .list .apiary:hover {
+      color: #222;
+      background-color: #fece06; }
+    .dashboard .sidebar .list .active {
+      color: #222;
+      background-color: #fece06; }
+    .dashboard .sidebar .apiary-info {
+      width: 220px;
+      height: 220px;
+      background-color: #222;
+      bottom: 0;
+      position: fixed; }
+      .dashboard .sidebar .apiary-info .title {
+        position: relative;
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #ddd;
+        margin-left: 20px; }
+      .dashboard .sidebar .apiary-info .field {
+        font-size: 13px;
+        padding-left: 25px;
+        color: #aaa;
+        margin-top: 5px; }
+        .dashboard .sidebar .apiary-info .field span {
+          margin-left: 5px; }
+      .dashboard .sidebar .apiary-info .options {
+        margin-top: 10px;
+        padding-left: 25px; }
+        .dashboard .sidebar .apiary-info .options .option {
+          font-size: 12px;
+          cursor: pointer;
+          color: #aaa;
+          margin-right: 5px; }
+        .dashboard .sidebar .apiary-info .options .option:hover {
+          color: #fece06;
+          text-decoration: none; }
   .dashboard .content {
     float: left;
     background-color: #4b0;
     height: 100%;
-    width: calc(100% - 200px); }
+    width: calc(100% - 220px); }
+    .dashboard .content .tabs {
+      background-color: cyan;
+      width: 100%; }
+      .dashboard .content .tabs .tab {
+        text-align: center;
+        display: inline-block;
+        width: 33%;
+        cursor: pointer; }
+      .dashboard .content .tabs .tab:hover {
+        background-color: tomato; }
+      .dashboard .content .tabs .active {
+        background-color: silver; }
+    .dashboard .content .info-panel {
+      width: 100%;
+      height: 300px;
+      background-color: hotpink;
+      bottom: 0;
+      position: fixed;
+      opacity: 0.3; }
   .dashboard .control-panel {
     background-color: #4bb;
     width: 200px;

@@ -75,6 +75,9 @@
                         </div>
                     </form>
                 </div>
+                <div class="login">
+                    <a href="{{ url('/login') }}">Entrar</a>
+                </div>
             </div>
         </div>
     </div>

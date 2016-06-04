@@ -59,6 +59,9 @@
                         </div>
                     </form>
                 </div>
+                <div class="register">
+                    <a href="{{ url('/register') }}">Registo</a>
+                </div>
             </div>
         </div>
     </div>
