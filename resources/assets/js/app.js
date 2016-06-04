@@ -10,15 +10,6 @@ Vue.component('beehive', {
 	template: '#beehive'
 });
 
-Vue.component('info', {
-	props: [
-		'name',
-		'location',
-		'flora',
-	],
-	template: '#info'
-});
-
 Vue.component('beehives', {
 	props: [
 		'create',
@@ -26,18 +17,6 @@ Vue.component('beehives', {
 	],
 	template: '#beehives'
 });
-
-Vue.component('settings', {
-	props: [
-		'editor',
-	],
-	template: '#settings',
-	methods: {
-		deleteApiary: function(){
-			this.$dispatch('delete');
-		}
-	}
-})
 
 Vue.component('apiary', {
 	props: ['apiary'],

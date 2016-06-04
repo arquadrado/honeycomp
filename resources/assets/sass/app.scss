@@ -146,32 +146,96 @@ $secondGreyShade: #ddd;
 	}
 	.content {
 		float: left;
-		background-color: #4b0;
 		height: 100%;
 		width: calc(100% - 220px);
-		.tabs {
-			background-color: cyan;
-			width: 100%;
-			.tab{
-				text-align: center;
-				display: inline-block;
-				width: 33%;
-				cursor: pointer;
+		.beehives-container {
+			padding-top: 37px;
+			min-width: 500px;
+			.even{
+				height: 73px;
+				.beehive {
+					position: relative;
+					width: 130px;
+					height: 73px;
+					background-color: red;
+					float: left;
+					a {
+						margin-top: 50px;
+						cursor: pointer;
+						display: block;
+						width: 100%;
+						height: 100%;
+						img {
+							position: absolute;
+							top: -37px;
+							width: 130px;
+							height: 150px;
+						}
+					}
+				}
 			}
-			.tab:hover {
-				background-color: tomato;
+			.odd {
+				height: 73px;
+				margin-top: 37px;
+				margin-left: 65px;
+				.beehive {
+					position: relative;
+					width: 130px;
+					height: 73px;
+					background-color: red;
+					float: left;
+					a {
+						margin-top: 50px;
+						cursor: pointer;
+						display: block;
+						width: 100%;
+						height: 100%;
+						img {
+							position: absolute;
+							top: -37px;
+							width: 130px;
+							height: 150px;
+						}
+					}
+				}
 			}
-			.active {
-				background-color: silver;	
-			}
+				
 		}
 		.info-panel {
 			width: 100%;
-			height: 300px;
-			background-color: hotpink;
+			height: 200px;
+			background-color: rgba(255, 255, 255, 0.5);
 			bottom: 0;
 			position: fixed;
-			opacity: 0.3;
+			.create-beehive {
+				position: relative;
+				display: table;
+				height: 50px;
+				font-size: 13px;
+				font-weight: bold;
+				text-align: center;
+				text-transform: uppercase;	
+				color: $backgroundColor;
+				margin-left: 20px;
+				span {
+					display: table-cell;
+					padding-left: 25px;
+					vertical-align: middle;
+				}
+				a {
+					color: #777;
+					position: absolute;
+					top: 2px;
+					display: table-cell;
+					font-size: 30px;
+					font-weight: 900;
+					vertical-align: middle;
+				}
+				a:hover {
+					text-decoration: none;
+					color: $activeColor;
+				}
+			}
 		}
 	}
 	.control-panel {

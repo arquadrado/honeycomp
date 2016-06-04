@@ -1,5 +1,6 @@
 <template id="beehives">
-	<a href="@{{ create }}" class="add-item">Adicionar colmeia</a>
-	<beehive v-for="beehive in beehives" :beehive="beehive"></beehive>
+	<div class="beehives-container">
+		<beehive v-for="beehive in beehives" :beehive="beehive"></beehive>
+	</div>
 </template>
 @include('apiary.components.beehives.beehive')

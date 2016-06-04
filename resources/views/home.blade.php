@@ -57,6 +57,30 @@
             </div>
         </div>            
         <div class="content">
+            <!-- <div class="beehives-container">
+                <div class="even">
+                    <div class="beehive">
+                        <a href=""><img src="{{ url('/img/colmeia.png') }}" alt=""></a>
+                    </div>
+                    <div class="beehive">
+                        <a href=""><img src="{{ url('/img/colmeia.png') }}" alt=""></a>
+                    </div>
+                    <div class="beehive">
+                        <a href=""><img src="{{ url('/img/colmeia.png') }}" alt=""></a>
+                    </div>
+                </div>
+                <div class="odd">
+                    <div class="beehive">
+                        <a href=""><img src="{{ url('/img/colmeia.png') }}" alt=""></a>
+                    </div>
+                    <div class="beehive">
+                        <a href=""><img src="{{ url('/img/colmeia.png') }}" alt=""></a>
+                    </div>
+                    <div class="beehive">
+                        <a href=""><img src="{{ url('/img/colmeia.png') }}" alt=""></a>
+                    </div>
+                </div>
+            </div> -->
             <apiary :apiary="selectedApiary"></apiary>
             <div class="info-panel">
                 <div class="create-beehive">
