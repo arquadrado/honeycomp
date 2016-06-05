@@ -1,21 +1,65 @@
 Vue.config.debug = true;
-var currentApiary = new Apiary(handover.current_apiary);
+
+var windowWidth = $('.content').width();
+console.log(windowWidth/50);
+console.log(windowWidth);
+
+var beehiveFactory = new BeehiveFactory();
+var currentApiary = new Apiary(handover.current_apiary, beehiveFactory);
+currentApiary.setBeehives();
 var currentTab = handover.current_tab;
+
 var apiaries = handover.apiaries.map(function(el){
-	return new Apiary(el);
+	var beehiveFactory = new BeehiveFactory();
+	var apiary = new Apiary(el, beehiveFactory);
+	apiary.setBeehives();
+	return apiary;
 });
 
 Vue.component('beehive', {
 	props: ['beehive'],
-	template: '#beehive'
+	template: '#beehive',
+	data: function(){
+		return {
+
+		};
+	},
+	computed: {
+		isFirstInRow: function(){
+			return this.beehive.index % (Math.floor(windowWidth/60.62)) === 0;
+		},
+		isĹastInRow: function(){
+			return this.beehive.index % (Math.floor(windowWidth/60.62)) === ((Math.floor(windowWidth/60.62)) - 1);
+		},
+		beehivesCount: function(){
+			return this.$parent.beehivesCount;
+		},
+		inOddRow: function(){
+			var numberOfColumns = Math.floor(windowWidth/60.62);
+			var numberOfRows = Math.ceil(this.beehivesCount/numberOfColumns);
+			for(var i = 0; i < numberOfRows; i++){
+				if(this.beehive.index >= (i * numberOfColumns) &&
+				   this.beehive.index < ((i * numberOfColumns) + numberOfColumns)) {
+					return i % 2 !== 0;
+				} 
+			}
+		},
+		addMargin: function(){
+			return this.isFirstInRow && this.inOddRow;
+		}
+	}
 });
 
 Vue.component('beehives', {
 	props: [
-		'create',
 		'beehives'
 	],
-	template: '#beehives'
+	template: '#beehives',
+	computed: {
+		beehivesCount: function(){
+			return this.beehives.length;
+		}
+	}
 });
 
 Vue.component('apiary', {
@@ -88,7 +132,7 @@ var app = new Vue({
 });
 
 //constructors
-function Apiary(model){
+function Apiary(model, factory){
 	this.id = model.id;
 	this.user_id = model.user_id;
 	this.name = model.name;
@@ -96,6 +140,11 @@ function Apiary(model){
 	this.dominant_flora = model.dominant_flora;
 	this.editor_route = model.editor_route;
 	this.create_beehive_route = model.create_beehive_route;
+	this.setBeehives = function(){
+		this.beehives = model.beehives.map(function(el){
+			return factory.createBeehive(el);
+		});
+	};
 	this.beehives = model.beehives;
 	this.remove = function(){
 		this.ajaxRequest(this, 'http://mel.local/apiarios/apagar', 'POST');
@@ -121,6 +170,18 @@ function Apiary(model){
 	};
 }
 
+function BeehiveFactory(){
+	this.index = 0;
+	this.createBeehive = function(model){
+		return {
+			index: this.index++,
+			id: model.id,
+			apiary_id: model.apiary_id,
+			name: model.name,
+			type: model.type
+		};
+	}
+}
 
 
 //# sourceMappingURL=app.js.map

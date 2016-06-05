@@ -145,12 +145,39 @@ $secondGreyShade: #ddd;
 		}
 	}
 	.content {
+		padding: 50px;
 		float: left;
 		height: 100%;
 		width: calc(100% - 220px);
 		.beehives-container {
 			padding-top: 37px;
-			min-width: 500px;
+			width: 100%;
+			.beehive {
+				position: relative;
+				height: 35px;
+				width: 60.62px;
+				float: left;
+				margin-top: 18px;
+				a {
+					cursor: pointer;
+					display: block;
+					width: 100%;
+					height: 100%;
+					svg {
+						position: absolute;
+						top: -18px;
+						polygon {
+							fill: #ddd;
+						}
+						polygon:hover {
+							fill: $activeColor;
+						}
+					}
+				}
+			}
+			.first {
+				margin-left: 30px;
+			}
 			.even{
 				height: 73px;
 				.beehive {

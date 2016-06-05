@@ -109,12 +109,33 @@
           color: #fece06;
           text-decoration: none; }
   .dashboard .content {
+    padding: 50px;
     float: left;
     height: 100%;
     width: calc(100% - 220px); }
     .dashboard .content .beehives-container {
       padding-top: 37px;
-      min-width: 500px; }
+      width: 100%; }
+      .dashboard .content .beehives-container .beehive {
+        position: relative;
+        height: 35px;
+        width: 60.62px;
+        float: left;
+        margin-top: 18px; }
+        .dashboard .content .beehives-container .beehive a {
+          cursor: pointer;
+          display: block;
+          width: 100%;
+          height: 100%; }
+          .dashboard .content .beehives-container .beehive a svg {
+            position: absolute;
+            top: -18px; }
+            .dashboard .content .beehives-container .beehive a svg polygon {
+              fill: #ddd; }
+            .dashboard .content .beehives-container .beehive a svg polygon:hover {
+              fill: #fece06; }
+      .dashboard .content .beehives-container .first {
+        margin-left: 30px; }
       .dashboard .content .beehives-container .even {
         height: 73px; }
         .dashboard .content .beehives-container .even .beehive {
