@@ -127,4 +127,11 @@ class HomeController extends Controller
 
         return redirect()->route('home');
     }
+
+    public function editBeehive($beehiveId)
+    {
+        $beehive = Beehive::find($beehiveId);
+
+        return view('apiary.components.beehives.edit', ['beehive' => $beehive]);
+    }
 }

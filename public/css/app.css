@@ -109,7 +109,6 @@
           color: #fece06;
           text-decoration: none; }
   .dashboard .content {
-    padding: 50px;
     float: left;
     height: 100%;
     width: calc(100% - 220px); }
@@ -130,8 +129,6 @@
           .dashboard .content .beehives-container .beehive a svg {
             position: absolute;
             top: -18px; }
-            .dashboard .content .beehives-container .beehive a svg polygon {
-              fill: #ddd; }
             .dashboard .content .beehives-container .beehive a svg polygon:hover {
               fill: #fece06; }
       .dashboard .content .beehives-container .first {
@@ -178,7 +175,7 @@
               height: 150px; }
     .dashboard .content .info-panel {
       width: 100%;
-      height: 200px;
+      height: 220px;
       background-color: rgba(255, 255, 255, 0.5);
       bottom: 0;
       position: fixed; }
@@ -194,12 +191,11 @@
         margin-left: 20px; }
         .dashboard .content .info-panel .create-beehive span {
           display: table-cell;
-          padding-left: 25px;
-          vertical-align: middle; }
+          padding-left: 25px; }
         .dashboard .content .info-panel .create-beehive a {
           color: #777;
           position: absolute;
-          top: 2px;
+          top: -15px;
           display: table-cell;
           font-size: 30px;
           font-weight: 900;
@@ -207,6 +203,12 @@
         .dashboard .content .info-panel .create-beehive a:hover {
           text-decoration: none;
           color: #fece06; }
+      .dashboard .content .info-panel .beehive-info {
+        margin-left: 20px; }
+        .dashboard .content .info-panel .beehive-info .field-display .field-label {
+          display: inline-block; }
+        .dashboard .content .info-panel .beehive-info .field-display .field-info {
+          display: inline-block; }
   .dashboard .control-panel {
     background-color: #4bb;
     width: 200px;

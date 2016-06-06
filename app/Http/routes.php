@@ -57,3 +57,15 @@ Route::post('/apiarios/colmeia/adicionar/{apiaryId}', [
 	'as'   => 'post-create.beehive',
 	'uses' => 'HomeController@postCreateBeehive'
 ]);
+
+Route::get('/apiarios/colmeia/editar/{beehiveId}', [
+	'as'   => 'edit.beehive',
+	'uses' => 'HomeController@editBeehive'
+]);
+
+Route::post('/apiarios/colmeia/editar/{beehiveId}', [
+	'as'   => 'post-edit.beehive',
+	'uses' => 'HomeController@postEditBeehive'
+]);
+
+

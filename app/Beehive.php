@@ -12,6 +12,17 @@ class Beehive extends Model
 		'type',
 	];
 
+    protected $visible = [
+        'apiary_id',
+        'name',
+        'type',
+        'editor_route',
+    ];
+
+    protected $appends = [
+        'editor_route',
+    ];
+
     public function apiary()
     {
         return $this->belongsTo('App\Apiary');
@@ -20,5 +31,10 @@ class Beehive extends Model
     public function colony()
     {
         return $this->hasOne('App\Colony');
+    }
+
+    public function getEditorRouteAttribute()
+    {
+        return route('edit.beehive', ['id' => $this->id]);
     }
 }

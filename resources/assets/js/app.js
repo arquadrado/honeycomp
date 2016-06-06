@@ -25,6 +25,9 @@ Vue.component('beehive', {
 		};
 	},
 	computed: {
+		isActive: function(){
+			return this.beehive === this.$parent.currentBeehive ? '#fece06' : '#dddddd';
+		},
 		isFirstInRow: function(){
 			return this.beehive.index % (Math.floor(windowWidth/60.62)) === 0;
 		},
@@ -47,17 +50,11 @@ Vue.component('beehive', {
 		addMargin: function(){
 			return this.isFirstInRow && this.inOddRow;
 		}
-	}
-});
-
-Vue.component('beehives', {
-	props: [
-		'beehives'
-	],
-	template: '#beehives',
-	computed: {
-		beehivesCount: function(){
-			return this.beehives.length;
+	},
+	methods: {
+		activateBeehive: function(){
+			this.$dispatch('activateBeehive', this.beehive);
+			this.active = true;
 		}
 	}
 });
@@ -67,8 +64,16 @@ Vue.component('apiary', {
 	template: '#apiary',
 	data: function(){
 		return {
-			active: currentTab
+			
 		}
+	},
+	computed: {
+		beehivesCount: function(){
+			return this.apiary.beehives.length;
+		},
+		currentBeehive: function(){
+			return this.$parent.selectedBeehive;
+		} 
 	},
 	methods: {
 		setActiveComponent: function(component){
@@ -96,6 +101,12 @@ Vue.component('apiary', {
 				return true;
 			}	
 		}
+	},
+	events: {
+		'activateBeehive': function(beehive){
+			this.currentBeehive = beehive;
+			this.$dispatch('currentBeehive', beehive);
+		}
 	}
 });
 
@@ -103,11 +114,13 @@ var app = new Vue({
 	el: '#app',
 	data: {
 		apiaries: apiaries,
-		selectedApiary: currentApiary
+		selectedApiary: currentApiary,
+		selectedBeehive: currentApiary.beehives[0]
 	},
 	methods: {
 		selectApiary: function(apiary){
 			this.selectedApiary = apiary;
+			this.selectedBeehive = this.selectedApiary.beehives[0]; 
 			this.selectedApiary.saveInSession();
 		},
 		deleteApiary: function(apiary){
@@ -127,6 +140,11 @@ var app = new Vue({
 	events: {
 		'delete': function(){
 			this.deleteApiary(this.selectedApiary);
+		},
+		'currentBeehive': function(beehive){
+			console.log(beehive);
+			this.selectedBeehive = beehive;
+			console.log(this.selectedBeehive);
 		}
 	}
 });
@@ -178,7 +196,8 @@ function BeehiveFactory(){
 			id: model.id,
 			apiary_id: model.apiary_id,
 			name: model.name,
-			type: model.type
+			type: model.type,
+			editorRoute: model.editor_route
 		};
 	}
 }

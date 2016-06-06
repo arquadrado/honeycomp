@@ -145,7 +145,6 @@ $secondGreyShade: #ddd;
 		}
 	}
 	.content {
-		padding: 50px;
 		float: left;
 		height: 100%;
 		width: calc(100% - 220px);
@@ -167,7 +166,6 @@ $secondGreyShade: #ddd;
 						position: absolute;
 						top: -18px;
 						polygon {
-							fill: #ddd;
 						}
 						polygon:hover {
 							fill: $activeColor;
@@ -230,7 +228,7 @@ $secondGreyShade: #ddd;
 		}
 		.info-panel {
 			width: 100%;
-			height: 200px;
+			height: 220px;
 			background-color: rgba(255, 255, 255, 0.5);
 			bottom: 0;
 			position: fixed;
@@ -247,12 +245,11 @@ $secondGreyShade: #ddd;
 				span {
 					display: table-cell;
 					padding-left: 25px;
-					vertical-align: middle;
 				}
 				a {
 					color: #777;
 					position: absolute;
-					top: 2px;
+					top: -15px;
 					display: table-cell;
 					font-size: 30px;
 					font-weight: 900;
@@ -261,6 +258,17 @@ $secondGreyShade: #ddd;
 				a:hover {
 					text-decoration: none;
 					color: $activeColor;
+				}
+			}
+			.beehive-info {
+				margin-left: 20px;
+				.field-display {
+					.field-label {
+						display: inline-block;
+					}
+					.field-info {
+						display: inline-block;
+					}
 				}
 			}
 		}
