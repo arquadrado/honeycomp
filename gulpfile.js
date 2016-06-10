@@ -19,6 +19,9 @@ elixir(function(mix) {
     mix.scripts([
 	   	'reqs/vue.js',
 	    'reqs/jquery-224.js'
-	], 'public/js/reqs.js')
-    .scripts(['app.js'], 'public/js/app.js');
+	], 'public/js/reqs.js');
+});
+
+elixir(function(mix){
+	mix.scriptsIn('resources/assets/js/app');
 });

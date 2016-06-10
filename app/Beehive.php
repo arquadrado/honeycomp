@@ -13,14 +13,17 @@ class Beehive extends Model
 	];
 
     protected $visible = [
+        'id',
         'apiary_id',
         'name',
         'type',
         'editor_route',
+        'delete_route',
     ];
 
     protected $appends = [
         'editor_route',
+        'delete_route',
     ];
 
     public function apiary()
@@ -36,5 +39,10 @@ class Beehive extends Model
     public function getEditorRouteAttribute()
     {
         return route('edit.beehive', ['id' => $this->id]);
+    }
+
+    public function getDeleteRouteAttribute()
+    {
+        return route('delete.beehive', ['id' => $this->id]);
     }
 }

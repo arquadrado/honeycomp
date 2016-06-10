@@ -29,11 +29,12 @@ class HomeController extends Controller
     {
         $apiaries = Apiary::all();
         $currentApiary = !is_null(Apiary::find(session('current_apiary_id'))) ? Apiary::find(session('current_apiary_id')) : Apiary::first();
-        $currentTab = session('current_tab', 'info');
-        //dd($currentTab);
+
+        $currentBeehive = $currentApiary->containsBeehive(session('current_beehive_id'));   
+
         Asset::json('token', csrf_token());
         Asset::json('current_apiary', $currentApiary);
-        Asset::json('current_tab', $currentTab);
+        Asset::json('current_beehive', $currentBeehive);
         Asset::json('apiaries', $apiaries);
 
         return view('home');
@@ -57,6 +58,8 @@ class HomeController extends Controller
 
         $apiary = Apiary::create($data);
 
+        session(['current_apiary_id' => $apiary->id]);
+
         return redirect()->route('home');
     }
 
@@ -74,6 +77,7 @@ class HomeController extends Controller
         $apiary->location = request('location');
         $apiary->dominant_flora = request('dominant_flora');
         $apiary->save();
+
         return redirect('home');
     }
 
@@ -112,10 +116,29 @@ class HomeController extends Controller
     public function createBeehive($apiaryId)
     {
         $apiary = Apiary::find($apiaryId);
-        return view('apiary.components.beehives.create', ['apiary' => $apiary]);
+
+        $data = [
+            'apiary_id'  => $apiary->id,
+            'beehive' => null,
+            'context' => 'create',
+        ];
+
+        return view('apiary.components.beehives.edit', ['data' => $data]);
     }
 
-    public function postCreateBeehive($apiaryId)
+    public function editBeehive($beehiveId){
+        $beehive = Beehive::find($beehiveId);
+
+        $data = [
+            'apiary_id'  => $beehive->apiary->id,
+            'beehive' => $beehive,
+            'context' => 'edit',
+        ];
+        
+        return view('apiary.components.beehives.edit', ['data' => $data]);
+    }
+
+    public function postEditBeehive($apiaryId, $beehiveId = null)
     {
         $data = [
             'apiary_id'      => $apiaryId,
@@ -123,15 +146,31 @@ class HomeController extends Controller
             'type'       => request('type'),
         ];
 
-        $beehive = Beehive::create($data);
+        $beehive = is_null($beehiveId) ? Beehive::create(['apiary_id' => $apiaryId]) : Beehive::find($beehiveId);
+
+        $beehive->fill($data);
+        $beehive->save();
+
+        session([
+            'current_apiary_id' => $apiaryId,
+            'current_beehive_id' => $beehive->id,
+        ]);
 
         return redirect()->route('home');
     }
 
-    public function editBeehive($beehiveId)
+    public function deleteBeehive()
     {
-        $beehive = Beehive::find($beehiveId);
+        if (request()->isMethod('post')){
+            $data = request()->all();
+            if (isset($data['item_id'])){
+                Beehive::destroy($data['item_id']);
+                //dd(Employee::find($data['resource_id']));
+            }
+            return response()->json(['response' => 'This is post method']);
+        }
 
-        return view('apiary.components.beehives.edit', ['beehive' => $beehive]);
+        return response()->json(['response' => 'This is get method']);
     }
+
 }

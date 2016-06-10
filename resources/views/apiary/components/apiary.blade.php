@@ -7,8 +7,8 @@
             <a class="add-item" href="@{{ apiary.create_beehive_route }}">+</a>
             <span>Adicionar colmeia</span>
         </div>
-        <div class="beehive-info">
-        	<div class="field-label field-display">
+        <div class="beehive-info" v-if="currentBeehive">
+        	<div class="field-display">
         		<label for="beehive-name">Nome</label>
         		<div class="field-info" id="beehive-name">@{{ currentBeehive.name }}</div>	
         	</div>
@@ -16,8 +16,18 @@
         		<label for="field-label beehive-type">Tipo</label>
         		<div class="field-info" id="beehive-type">@{{ currentBeehive.type }}</div>	
         	</div>
-        	<div class="beehive-editor">
-        		<a href="@{{ currentBeehive.editorRoute }}">Editar</a>
+            <div class="field-display">
+                <label for="field-label beehive-population">População da colónia</label>
+                <div class="field-info" id="beehive-population">@{{ currentBeehive.type }}</div>  
+            </div>
+            <div class="field-display">
+                <label for="field-label beehive-colony-formation">Data de formação da colónia</label>
+                <div class="field-info" id="beehive-type">@{{ currentBeehive.type }}</div>  
+            </div>
+        	<div class="beehive-settings">
+        		<a class="link" href="@{{ currentBeehive.editorRoute }}"><i class="fa fa-eye" aria-hidden="true"></i>Detalhes</a>
+                <a class="link" href="@{{ currentBeehive.editorRoute }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar</a>
+                <a class="link" @click="deleteBeehive"><i class="fa fa-trash" aria-hidden="true"></i>Apagar</a>
         	</div>
         </div>
     </div>

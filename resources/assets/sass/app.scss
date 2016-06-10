@@ -12,6 +12,20 @@ $secondGreyShade: #ddd;
 	font-weight: bolder;
 }
 
+.link {
+	font-size: 12px;
+	cursor: pointer;
+	color: $firstGreyShade;
+	i {
+		margin-right: 2px;
+	}
+}
+.link:hover {
+	color: $activeColor;
+	text-decoration: none;
+}
+
+//tree
 .dashboard {
 	position: relative;
 	background-color: #4b0;
@@ -235,13 +249,12 @@ $secondGreyShade: #ddd;
 			.create-beehive {
 				position: relative;
 				display: table;
-				height: 50px;
 				font-size: 13px;
 				font-weight: bold;
 				text-align: center;
 				text-transform: uppercase;	
 				color: $backgroundColor;
-				margin-left: 20px;
+				margin: 0 0 0 20px;
 				span {
 					display: table-cell;
 					padding-left: 25px;
@@ -263,11 +276,22 @@ $secondGreyShade: #ddd;
 			.beehive-info {
 				margin-left: 20px;
 				.field-display {
+					margin-top: 5px;
 					.field-label {
 						display: inline-block;
 					}
 					.field-info {
 						display: inline-block;
+					}
+				}
+				.beehive-settings {
+					margin-top: 10px;
+					.link {
+						margin-right: 5px;
+						color: $backgroundColor
+					}
+					.link:hover {
+						color: $activeColor	
 					}
 				}
 			}

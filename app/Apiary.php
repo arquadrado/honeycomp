@@ -45,4 +45,14 @@ class Apiary extends Model
     {
     	return route('create.beehive', ['id' => $this->id]);
     }
+
+    public function containsBeehive($beehiveId)
+    {
+    	foreach ($this->beehives as $beehive) {
+    		if ($beehive->id === $beehiveId){
+    			return $beehive;
+    		}
+    	}
+    	return $this->beehives[0];
+    }
 }

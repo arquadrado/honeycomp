@@ -2,6 +2,17 @@
   color: #fff;
   font-weight: bolder; }
 
+.link {
+  font-size: 12px;
+  cursor: pointer;
+  color: #aaa; }
+  .link i {
+    margin-right: 2px; }
+
+.link:hover {
+  color: #fece06;
+  text-decoration: none; }
+
 .dashboard {
   position: relative;
   background-color: #4b0; }
@@ -182,13 +193,12 @@
       .dashboard .content .info-panel .create-beehive {
         position: relative;
         display: table;
-        height: 50px;
         font-size: 13px;
         font-weight: bold;
         text-align: center;
         text-transform: uppercase;
         color: #222;
-        margin-left: 20px; }
+        margin: 0 0 0 20px; }
         .dashboard .content .info-panel .create-beehive span {
           display: table-cell;
           padding-left: 25px; }
@@ -205,10 +215,19 @@
           color: #fece06; }
       .dashboard .content .info-panel .beehive-info {
         margin-left: 20px; }
-        .dashboard .content .info-panel .beehive-info .field-display .field-label {
-          display: inline-block; }
-        .dashboard .content .info-panel .beehive-info .field-display .field-info {
-          display: inline-block; }
+        .dashboard .content .info-panel .beehive-info .field-display {
+          margin-top: 5px; }
+          .dashboard .content .info-panel .beehive-info .field-display .field-label {
+            display: inline-block; }
+          .dashboard .content .info-panel .beehive-info .field-display .field-info {
+            display: inline-block; }
+        .dashboard .content .info-panel .beehive-info .beehive-settings {
+          margin-top: 10px; }
+          .dashboard .content .info-panel .beehive-info .beehive-settings .link {
+            margin-right: 5px;
+            color: #222; }
+          .dashboard .content .info-panel .beehive-info .beehive-settings .link:hover {
+            color: #fece06; }
   .dashboard .control-panel {
     background-color: #4bb;
     width: 200px;
