@@ -48,6 +48,10 @@ class Apiary extends Model
 
     public function containsBeehive($beehiveId)
     {
+    	if (is_null($beehiveId)){
+    		return null;
+    	}
+    	
     	foreach ($this->beehives as $beehive) {
     		if ($beehive->id === $beehiveId){
     			return $beehive;

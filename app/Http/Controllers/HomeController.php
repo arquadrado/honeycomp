@@ -6,6 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Apiary;
 use App\Beehive;
+use App\Colony;
 use Asset;
 
 class HomeController extends Controller
@@ -30,7 +31,7 @@ class HomeController extends Controller
         $apiaries = Apiary::all();
         $currentApiary = !is_null(Apiary::find(session('current_apiary_id'))) ? Apiary::find(session('current_apiary_id')) : Apiary::first();
 
-        $currentBeehive = $currentApiary->containsBeehive(session('current_beehive_id'));   
+        $currentBeehive = !is_null($currentApiary) ? $currentApiary->containsBeehive(session('current_beehive_id')) : null;
 
         Asset::json('token', csrf_token());
         Asset::json('current_apiary', $currentApiary);
@@ -47,7 +48,6 @@ class HomeController extends Controller
 
     public function saveApiary(Request $request)
     {
-        //dd($request->user()->id);
 
         $data = [
             'user_id'        => $request->user()->id,
@@ -128,7 +128,6 @@ class HomeController extends Controller
 
     public function editBeehive($beehiveId){
         $beehive = Beehive::find($beehiveId);
-
         $data = [
             'apiary_id'  => $beehive->apiary->id,
             'beehive' => $beehive,
@@ -146,9 +145,34 @@ class HomeController extends Controller
             'type'       => request('type'),
         ];
 
-        $beehive = is_null($beehiveId) ? Beehive::create(['apiary_id' => $apiaryId]) : Beehive::find($beehiveId);
+        if (is_null($beehiveId)){
 
-        $beehive->fill($data);
+            $beehive = Beehive::create([
+                'apiary_id' => $apiaryId,
+                'name'      => request('name'),
+                'type'      => request('type'),
+            ]);
+
+            $colony = Colony::create([
+                'beehive_id' => $beehive->id,
+                'name'       => request('colony_name'),
+                'population' => request('population'),
+            ]);
+
+            session([
+                'current_apiary_id' => $apiaryId,
+                'current_beehive_id' => $beehive->id,
+            ]);
+
+            return redirect()->route('home');
+        }
+
+        $beehive = Beehive::find($beehiveId);
+        $beehive->name = request('name');
+        $beehive->type = request('type');
+        $beehive->colony->name = request('colony_name');
+        $beehive->colony->population = request('population');
+        $beehive->colony->save();
         $beehive->save();
 
         session([

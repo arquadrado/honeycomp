@@ -1,8 +1,6 @@
 Vue.config.debug = true;
 
 var windowWidth = $('.content').width();
-console.log(windowWidth/50);
-console.log(windowWidth);
 
 var beehiveFactory = new BeehiveFactory();
 
@@ -19,15 +17,19 @@ var currentApiary = (function(){
 			return apiaries[i];
 		}
 	};
+	return null;
 })();
 
 var currentBeehive = (function(){
-	for(var i = 0; i < currentApiary.beehives.length; i++){
-		if (currentApiary.beehives[i].id === handover.current_beehive.id){
-			return currentApiary.beehives[i];
-		}
-	};
-	return currentApiary.beehives[0];
+	if (currentApiary !== null){
+		for(var i = 0; i < currentApiary.beehives.length; i++){
+			if (currentApiary.beehives[i].id === handover.current_beehive.id){
+				return currentApiary.beehives[i];
+			}
+		};
+		return currentApiary.beehives[0];
+	}
+	return null;
 })();
 
 Vue.component('beehive', {
@@ -43,15 +45,12 @@ Vue.component('beehive', {
 			return this.beehive === this.$parent.currentBeehive ? '#fece06' : '#dddddd';
 		},
 		isFirstInRow: function(){
-			console.log(this.beehive.index);
 			return this.beehive.index % (Math.floor(windowWidth/60.62)) === 0;
 		},
 		isĹastInRow: function(){
 			return this.beehive.index % (Math.floor(windowWidth/60.62)) === ((Math.floor(windowWidth/60.62)) - 1);
 		},
 		beehivesCount: function(){
-			console.log('hey');
-			console.log(this.beehive);
 			return this.$parent.beehivesCount;
 		},
 		inOddRow: function(){
@@ -81,7 +80,7 @@ Vue.component('apiary', {
 	template: '#apiary',
 	data: function(){
 		return {
-			
+			showModal: false	
 		}
 	},
 	computed: {
@@ -100,6 +99,14 @@ Vue.component('apiary', {
 			}
 		}
 	}
+});
+
+Vue.component('modal', {
+  template: '#modal',
+  props: [
+  	'show',
+  	'data'
+  ]
 });
 
 var app = new Vue({
@@ -194,6 +201,7 @@ function BeehiveFactory(){
 			apiary_id: model.apiary_id,
 			name: model.name,
 			type: model.type,
+			colony: model.colony,
 			editorRoute: model.editor_route,
 			deleteRoute: model.delete_route
 		};

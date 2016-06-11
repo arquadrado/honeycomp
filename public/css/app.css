@@ -233,4 +233,88 @@
     width: 200px;
     float: right; }
 
+/*------- modal -------*/
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: table;
+  transition: opacity .3s ease; }
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle; }
+
+.modal-container {
+  position: relative;
+  width: 500px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border: 5px solid #222;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all .3s ease; }
+  .modal-container svg {
+    top: -36px;
+    left: -18px;
+    position: absolute;
+    z-index: 0; }
+    .modal-container svg polygon {
+      fill: #fece06; }
+
+.my-modal-header h3 {
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
+  color: #222;
+  border-bottom: 0; }
+
+.my-modal-body {
+  position: relative;
+  z-index: 1;
+  margin: 20px 0; }
+
+.my-modal-footer {
+  position: relative;
+  z-index: 1;
+  margin: 20px 0; }
+
+.confirm-button {
+  position: relative;
+  text-align: center;
+  font-weight: bolder;
+  display: inline-block;
+  margin: 0 auto;
+  text-transform: uppercase;
+  padding: 5px; }
+  .confirm-button button {
+    background-color: #fff;
+    border: 2px solid #222;
+    color: #222;
+    transition: all 0.2s ease-out; }
+
+.confirm-button:hover button {
+  background-color: #222;
+  color: #fff;
+  transition: all 0.2s ease-in; }
+
+/*
+ * the following styles are auto-applied to elements with
+ * v-transition="modal" when their visiblity is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+.modal-enter, .modal-leave {
+  opacity: 0; }
+
+.modal-enter .modal-container,
+.modal-leave .modal-container {
+  transform: scale(1.1); }
+
 /*# sourceMappingURL=app.css.map */

@@ -12,6 +12,10 @@
 						<input type="text" name="name" value="{{ !is_null($data['beehive']) ? $data['beehive']->name : '' }}">
                 		<label for="type">Tipo</label>
 						<input type="text" name="type" value="{{ !is_null($data['beehive']) ? $data['beehive']->type : '' }}">
+                        <label for="colony_name">Colónia</label>
+                        <input type="text" name="colony_name" value="{{ !is_null($data['beehive']) ? $data['beehive']->colony->name : '' }}">
+                        <label for="population">População da colónia</label>
+                        <input type="text" name="population" value="{{ !is_null($data['beehive']) ? $data['beehive']->colony->population : '' }}">
 					    <input type="hidden" name="_token" value="{{ csrf_token() }}">
 					    <button type="submit" class="btn btn-primary">Gravar</button>
 					</form>

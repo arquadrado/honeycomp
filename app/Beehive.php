@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Beehive extends Model
 {
+    protected $with = [
+        'colony',
+    ];
 	protected $fillable =  [
 		'apiary_id',
 		'name',
@@ -17,6 +20,7 @@ class Beehive extends Model
         'apiary_id',
         'name',
         'type',
+        'colony',
         'editor_route',
         'delete_route',
     ];

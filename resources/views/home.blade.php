@@ -23,10 +23,11 @@
                 <a class="add-item" href="{{ route('create.apiary') }}">+</a>
                 <span>Apiários</span>
             </div>
-            <div class="list">
+            <div class="list" v-if="selectedApiary !== null">
                 <div class="apiary" v-for="apiary in apiaries" v-on:click="selectApiary(apiary)" v-bind:class="{ 'active': isCurrentApiary(apiary) }">@{{ apiary.name }}</div>
             </div>
-            <div v-cloak class="apiary-info">
+
+            <div v-cloak class="apiary-info" v-if="selectedApiary !== null">
                 <span class="title">Info</span>
                 <div class="field name">
                     <label for="apiary-name">Nome</label>
@@ -56,7 +57,7 @@
                 </div>
             </div>
         </div>            
-        <div class="content">
+        <div class="content" v-if="selectedApiary !== null">
             <apiary :apiary="selectedApiary"></apiary>  
         </div> 
     </div>    
@@ -67,6 +68,7 @@
 @include('apiary.components.info')
 @include('apiary.components.beehives')
 @include('apiary.components.settings')
+@include('apiary.components.modal')
 
 
 @endsection
