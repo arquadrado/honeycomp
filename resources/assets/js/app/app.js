@@ -21,7 +21,7 @@ var currentApiary = (function(){
 })();
 
 var currentBeehive = (function(){
-	if (currentApiary !== null){
+	if (currentApiary !== null && handover.current_beehive){
 		for(var i = 0; i < currentApiary.beehives.length; i++){
 			if (currentApiary.beehives[i].id === handover.current_beehive.id){
 				return currentApiary.beehives[i];
@@ -41,24 +41,28 @@ Vue.component('beehive', {
 		};
 	},
 	computed: {
+		beehivesCount: function(){
+			return this.$parent.beehivesCount;
+		},
+		beehiveIndex: function(){
+			return this.$parent.apiary.beehives.indexOf(this.beehive);
+		},
 		isActive: function(){
 			return this.beehive === this.$parent.currentBeehive ? '#fece06' : '#dddddd';
 		},
 		isFirstInRow: function(){
-			return this.beehive.index % (Math.floor(windowWidth/60.62)) === 0;
+			return this.beehiveIndex % (Math.floor(this.$root.width/60.62)) === 0;
 		},
 		isĹastInRow: function(){
-			return this.beehive.index % (Math.floor(windowWidth/60.62)) === ((Math.floor(windowWidth/60.62)) - 1);
-		},
-		beehivesCount: function(){
-			return this.$parent.beehivesCount;
+			return this.beehiveIndex % (Math.floor(this.$root.width/60.62)) === ((Math.floor(this.$root.width/60.62)) - 1);
 		},
 		inOddRow: function(){
-			var numberOfColumns = Math.floor(windowWidth/60.62);
+
+			var numberOfColumns = Math.floor(this.$root.width/60.62);
 			var numberOfRows = Math.ceil(this.beehivesCount/numberOfColumns);
 			for(var i = 0; i < numberOfRows; i++){
-				if(this.beehive.index >= (i * numberOfColumns) &&
-				   this.beehive.index < ((i * numberOfColumns) + numberOfColumns)) {
+				if(this.beehiveIndex >= (i * numberOfColumns) &&
+				   this.beehiveIndex < ((i * numberOfColumns) + numberOfColumns)) {
 					return i % 2 !== 0;
 				} 
 			}
@@ -94,27 +98,47 @@ Vue.component('apiary', {
 	methods: {
 		deleteBeehive: function(){
 			if (confirm('Tem a certeza que quer remover esta colmeia?')){
+				var beehiveIndex = this.apiary.beehives.indexOf(this.$root.selectedBeehive);
 				this.apiary.removeBeehive(this.currentBeehive);
-				this.$dispatch('currentBeehive', this.apiary.beehives[0]);
+				console.log(this.apiary.beehives.length);
+				var beehiveToActivate = beehiveIndex >= this.apiary.beehives.length ? beehiveIndex - 1 : beehiveIndex;
+				this.$dispatch('activateBeehive', this.apiary.beehives[beehiveToActivate]);
 			}
 		}
 	}
 });
 
 Vue.component('modal', {
-  template: '#modal',
-  props: [
-  	'show',
-  	'data'
-  ]
-});
+    template: '#modal',
+    props: [
+    	'show',
+    	'beehive'
+    ],
+    methods: {
+    	saveInformation: function(){
+    		console.log('saving');
+    		var data = {
+    			name: this.$parent.currentBeehive.name,
+    			type: this.$parent.currentBeehive.type,
+    			population: this.$parent.currentBeehive.colony.population,
+    		};
+    		var url = this.beehive.editor_route;
+    		beehiveAjaxUpdate(data, url, 'POST');
+    		this.show = false;
+    	}
+    }
+});  
+
+
+
 
 var app = new Vue({
 	el: '#app',
 	data: {
 		apiaries: apiaries,
 		selectedApiary: currentApiary,
-		selectedBeehive: currentBeehive
+		selectedBeehive: currentBeehive,
+		width: windowWidth
 	},
 	methods: {
 		selectApiary: function(apiary){
@@ -142,9 +166,19 @@ var app = new Vue({
 		},
 		'activateBeehive': function(beehive){
 			this.selectedBeehive = beehive;
+		},
+		'test': function(width){
+			this.width = width;
 		}
 	}
 });
+
+$(window).on('resize', (event) => {
+	var containerWidth = $('.content').width();
+	app.$emit('test', containerWidth);
+});
+
+
 
 //constructors
 function Apiary(model, factory){
@@ -169,7 +203,7 @@ function Apiary(model, factory){
 		if (index > -1) {
 		    this.beehives.splice(index, 1);
 		}
-		this.ajaxRequest(beehive, beehive.deleteRoute, 'POST')
+		//this.ajaxRequest(beehive, beehive.deleteRoute, 'POST')
 	};
 	this.saveInSession = function(){
 		this.ajaxRequest(this, 'http://mel.local/apiarios/sessao', 'POST');	

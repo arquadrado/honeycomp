@@ -8,6 +8,7 @@ use App\Apiary;
 use App\Beehive;
 use App\Colony;
 use Asset;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $apiaries = Apiary::all();
+        $apiaries = Apiary::where('user_id', Auth::user()->id)->get();
         $currentApiary = !is_null(Apiary::find(session('current_apiary_id'))) ? Apiary::find(session('current_apiary_id')) : Apiary::first();
 
         $currentBeehive = !is_null($currentApiary) ? $currentApiary->containsBeehive(session('current_beehive_id')) : null;
@@ -48,7 +49,6 @@ class HomeController extends Controller
 
     public function saveApiary(Request $request)
     {
-
         $data = [
             'user_id'        => $request->user()->id,
             'name'           => request('name'),

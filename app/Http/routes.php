@@ -55,7 +55,7 @@ Route::get('/apiarios/colmeia/adicionar/{apiaryId}', [
 
 Route::get('/apiarios/colmeia/editar/{beehiveId}', [
 	'as'   => 'edit.beehive',
-	'uses' => 'HomeController@editBeehive'
+	'uses' => 'AjaxController@editBeehive'
 ]);
 
 Route::post('/apiarios/colmeia/editar/{apiaryId}/{beehiveId?}', [

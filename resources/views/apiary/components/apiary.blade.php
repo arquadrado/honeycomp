@@ -31,12 +31,20 @@
         	</div>
         </div>
     </div>
-    <modal :show.sync="showModal" :data.sync="currentBeehive">
-        <!--
-          you can use custom content here to overwrite
-          default content
-        -->
-        <h3 slot="header">@{{ currentBeehive.name }}</h3>
-        <p slot="body">A vida é como uma máquina de lavar, dá voltas e voltas.</p>
-      </modal>
+    <modal :show.sync="showModal" :beehive.sync="currentBeehive">
+        <div slot="body">
+            <div class="field">
+                <label for="name">Nome</label>
+                <input type="text" name="name" v-model="currentBeehive.name" value="@{{ currentBeehive.name }}">
+            </div>
+            <div class="field">
+                <label for="name">Tipo</label>
+                <input type="text" name="type" v-model="currentBeehive.type" value="@{{ currentBeehive.type }}">
+            </div>
+            <div class="field">
+                <label for="population">População</label>
+                <input type="text" name="population" v-model="currentBeehive.colony.population" value="@{{ currentBeehive.colony.population }}">
+            </div>
+        </div>
+    </modal>
 </template>

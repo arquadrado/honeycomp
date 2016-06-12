@@ -5,13 +5,24 @@
         <div class="modal-container">
             <div class="my-modal-header">
                 <slot name="header">
-                @{{ data.name }}
+                    <h3>Editar colmeia - @{{ beehive.name }}</h3>
                 </slot>
             </div>
             
             <div class="my-modal-body">
                 <slot name="body">
-                default body
+                    <div class="field">
+                        <label for="name">Nome</label>
+                        <input type="text" name="name" v-model="name" value="@{{ beehive.name }}">
+                    </div>
+                    <div class="field">
+                        <label for="name">Tipo</label>
+                        <input type="text" name="type" value="@{{ beehive.type }}">
+                    </div>
+                    <div class="field">
+                        <label for="population">População</label>
+                        <input type="text" name="population" value="@{{ beehive.colony.population }}">
+                    </div>
                 </slot>
             </div>
             <div class="my-modal-footer">
@@ -20,7 +31,7 @@
                 </slot>
             </div>
             <div class="confirm-button">
-                <button class="confirm-button" @click="show = false">Confirmar</button>
+                <button class="confirm-button" @click="saveInformation">Confirmar</button>
             </div>
 
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
