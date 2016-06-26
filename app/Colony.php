@@ -12,8 +12,11 @@ class Colony extends Model
 		'beehive_id',
 		'name',
 		'population',
+		'editor_route',
 	];
-	protected $appends = [];
+	protected $appends = [
+		'editor_route',
+	];
 
 	protected $fillable =  [
 		'beehive_id',
@@ -24,5 +27,10 @@ class Colony extends Model
     public function beehive()
     {
         return $this->belongsTo('App\Beehive');
+    }
+
+    public function getEditorRouteAttribute()
+    {
+    	return route('post.edit.colony', $this->id);
     }
 }

@@ -326,16 +326,16 @@ $secondGreyShade: #ddd;
 
 .modal-container {
 	position: relative;
-    width: 500px;
+    width: 554px;
+    height: 321px;
     margin: 0px auto;
     padding: 20px 30px;
     background-color: #fff;
-	border: 5px solid $backgroundColor;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     transition: all .3s ease;
     svg {
-    	top: -36px;
-    	left: -18px;
+    	top: -160px;
+    	left: 0;
     	position: absolute;
     	z-index: 0;
     	polygon {
@@ -372,6 +372,7 @@ $secondGreyShade: #ddd;
  	margin: 0 auto;
  	text-transform: uppercase;
  	padding: 5px;
+ 	z-index: 1;
  	button {
 	 	background-color: #fff;
 	 	border: 2px solid $backgroundColor;

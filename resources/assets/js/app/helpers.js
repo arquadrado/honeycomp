@@ -1,4 +1,5 @@
 function beehiveAjaxUpdate(data, url, method){
+	console.log(url);
 	$.ajax({
 		url: url,
 		data: {

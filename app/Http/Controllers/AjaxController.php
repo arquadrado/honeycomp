@@ -11,10 +11,15 @@ use Asset;
 
 class AjaxController extends Controller
 {
-	public function editBeehive($id){
+	public function postEditColony($id){
 		if (request()->isMethod('post')){
            
-			dd($id, 'hey');
+            if (request('data')){
+            	$colony = Colony::find($id);
+            	$colony->population = request('data')['population'];
+            	$colony->save();
+
+            }
 
            return response()->json(['response' => 'This is post method']);
         }

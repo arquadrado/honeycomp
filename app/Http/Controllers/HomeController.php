@@ -20,6 +20,8 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        Asset::json('token', csrf_token());
     }
 
     /**
@@ -28,18 +30,33 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $apiaries = Apiary::where('user_id', Auth::user()->id)->get();
-        $currentApiary = !is_null(Apiary::find(session('current_apiary_id'))) ? Apiary::find(session('current_apiary_id')) : Apiary::first();
-
-        $currentBeehive = !is_null($currentApiary) ? $currentApiary->containsBeehive(session('current_beehive_id')) : null;
-
-        Asset::json('token', csrf_token());
-        Asset::json('current_apiary', $currentApiary);
-        Asset::json('current_beehive', $currentBeehive);
-        Asset::json('apiaries', $apiaries);
+    {   
+        $this->prepareData();
 
         return view('home');
+    }
+
+    public function prepareData()
+    {
+        $apiaries = Apiary::where('user_id', Auth::user()->id)->get();
+
+        if (!is_null($apiaries)){
+            $currentApiary = !is_null(Apiary::find(session('current_apiary_id'))) ? Apiary::find(session('current_apiary_id')) : $apiaries->first();
+            $currentBeehive = $currentApiary->containsBeehive(session('current_beehive_id'));
+
+            Asset::json('apiaries_data', [
+                'apiaries'        => $apiaries,
+                'current_apiary'  => $currentApiary,
+                'current_beehive' => $currentBeehive
+            ]);
+
+            return;
+        }
+        Asset::json('apiaries_data', [
+            'apiaries'        => [],
+            'current_apiary'  => null,
+            'current_beehive' => null
+        ]);
     }
 
     public function addApiary()
@@ -99,14 +116,12 @@ class HomeController extends Controller
     {
         if (request()->isMethod('post')){
             $data = request()->all();
-            //dd($data);
             if (isset($data['item_id'])){
-                session(['current_apiary_id' => $data['item_id']]);
+                session([
+                    'current_apiary_id' => $data['item_id'],
+                    'current_beehive_id' => Apiary::find($data['item_id'])->beehives->first()
+                ]);
                 return response()->json(['response' => 'Apiary saved in session']);
-            }
-
-            if (isset($data['data']['tab'])){
-                session(['current_tab' => $data['data']['tab']]);
             }
         }
 

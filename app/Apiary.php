@@ -52,11 +52,14 @@ class Apiary extends Model
     		return null;
     	}
     	
-    	foreach ($this->beehives as $beehive) {
-    		if ($beehive->id === $beehiveId){
-    			return $beehive;
-    		}
-    	}
-    	return $this->beehives[0];
+        if (!$this->beehives->isEmpty()) {
+            foreach ($this->beehives as $beehive) {
+                if ($beehive->id === $beehiveId){
+                    return $beehive;
+                }
+            }
+        	return $this->beehives[0];
+        }
+        return null;
     }
 }

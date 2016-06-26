@@ -4,7 +4,7 @@ var windowWidth = $('.content').width();
 
 var beehiveFactory = new BeehiveFactory();
 
-var apiaries = handover.apiaries.map(function(el){
+var apiaries = handover.apiaries_data.apiaries.map(function(el){
 	var beehiveFactory = new BeehiveFactory();
 	var apiary = new Apiary(el, beehiveFactory);
 	apiary.setBeehives();
@@ -13,7 +13,7 @@ var apiaries = handover.apiaries.map(function(el){
 
 var currentApiary = (function(){
 	for(var i = 0; i < apiaries.length; i++){
-		if(handover.current_apiary.id === apiaries[i].id){
+		if(handover.apiaries_data.current_apiary.id === apiaries[i].id){
 			return apiaries[i];
 		}
 	};
@@ -21,9 +21,9 @@ var currentApiary = (function(){
 })();
 
 var currentBeehive = (function(){
-	if (currentApiary !== null && handover.current_beehive){
+	if (currentApiary !== null && handover.apiaries_data.current_beehive){
 		for(var i = 0; i < currentApiary.beehives.length; i++){
-			if (currentApiary.beehives[i].id === handover.current_beehive.id){
+			if (currentApiary.beehives[i].id === handover.apiaries_data.current_beehive.id){
 				return currentApiary.beehives[i];
 			}
 		};
@@ -116,13 +116,12 @@ Vue.component('modal', {
     ],
     methods: {
     	saveInformation: function(){
-    		console.log('saving');
     		var data = {
     			name: this.$parent.currentBeehive.name,
     			type: this.$parent.currentBeehive.type,
     			population: this.$parent.currentBeehive.colony.population,
     		};
-    		var url = this.beehive.editor_route;
+    		var url = this.beehive.colony.editor_route;
     		beehiveAjaxUpdate(data, url, 'POST');
     		this.show = false;
     	}

@@ -32,7 +32,7 @@
         </div>
     </div>
     <modal :show.sync="showModal" :beehive.sync="currentBeehive">
-        <div slot="body">
+        <div slot="body" v-if="currentBeehive !== null">
             <div class="field">
                 <label for="name">Nome</label>
                 <input type="text" name="name" v-model="currentBeehive.name" value="@{{ currentBeehive.name }}">

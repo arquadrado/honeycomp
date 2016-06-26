@@ -55,7 +55,7 @@ Route::get('/apiarios/colmeia/adicionar/{apiaryId}', [
 
 Route::get('/apiarios/colmeia/editar/{beehiveId}', [
 	'as'   => 'edit.beehive',
-	'uses' => 'AjaxController@editBeehive'
+	'uses' => 'HomeController@editBeehive'
 ]);
 
 Route::post('/apiarios/colmeia/editar/{apiaryId}/{beehiveId?}', [
@@ -66,6 +66,11 @@ Route::post('/apiarios/colmeia/editar/{apiaryId}/{beehiveId?}', [
 Route::post('/apiarios/colmeia/remover', [
 	'as'   => 'delete.beehive',
 	'uses' => 'HomeController@deleteBeehive'
+]);
+
+Route::post('apiarios/colmeia/colonia/{id}', [
+	'as'   => 'post.edit.colony',
+	'uses' => 'AjaxController@postEditColony'
 ]);
 
 

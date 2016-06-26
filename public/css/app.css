@@ -251,16 +251,16 @@
 
 .modal-container {
   position: relative;
-  width: 500px;
+  width: 554px;
+  height: 321px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
-  border: 5px solid #222;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all .3s ease; }
   .modal-container svg {
-    top: -36px;
-    left: -18px;
+    top: -160px;
+    left: 0;
     position: absolute;
     z-index: 0; }
     .modal-container svg polygon {
@@ -290,7 +290,8 @@
   display: inline-block;
   margin: 0 auto;
   text-transform: uppercase;
-  padding: 5px; }
+  padding: 5px;
+  z-index: 1; }
   .confirm-button button {
     background-color: #fff;
     border: 2px solid #222;

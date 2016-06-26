@@ -1,6 +1,6 @@
 <template id="modal">
 <div class="modal-mask" v-show="show" transition="modal">
-    <div class="modal-wrapper">
+    <div class="modal-wrapper" v-if="beehive !== null">
          
         <div class="modal-container">
             <div class="my-modal-header">
@@ -35,9 +35,9 @@
             </div>
 
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-     width="60.62px" height="70px" viewBox="0 0 60.62 70" enable-background="new 0 0 60.62 70" xml:space="preserve">
-            <polygon points="60.621,52.5 30.311,70 0,52.5 0,17.5 30.311,0 60.621,17.5 "/>
-            </svg>  
+     width="554.26px" height="640px" viewBox="0 0 554.26 640" enable-background="new 0 0 554.26 640" xml:space="preserve">
+                <polygon fill="#FECE06" points="554.257,479.999 277.128,639.999 0,479.999 0,160 277.128,0 554.257,160 "/>
+            </svg> 
         </div>
     </div>
 </div>
